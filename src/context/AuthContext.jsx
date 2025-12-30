@@ -10,11 +10,14 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Check local storage for persisted session
-        const storedUser = localStorage.getItem('chat_app_user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
+        // Mock User for testing - bypass login
+        const mockUser = {
+            id: 'user_123',
+            name: 'Test Setup User',
+            email: 'test@example.com',
+            avatar: null
+        };
+        setUser(mockUser);
         setLoading(false);
     }, []);
 

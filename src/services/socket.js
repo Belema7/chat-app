@@ -59,6 +59,14 @@ class MockSocket extends EventEmitter {
         console.log(`[Socket In] receiveMessage`, message);
         super.emit('receiveMessage', message);
     }
+
+    // Simulate receiving a post (echo back to all clients)
+    // In a real app, the server would broadcast this
+    createPost(post) {
+        // We can simulate an echo or broadcast here if we want to test multi-window
+        // but the component typically does an optimistic update.
+        // Let's just log it for now.
+    }
 }
 
 const socket = new MockSocket();
