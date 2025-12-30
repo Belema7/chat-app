@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { api } from '../services/api';
 
 const AuthContext = createContext();
 
@@ -6,13 +7,47 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-    const login = (userData) => setUser(userData);
-    const logout = () => setUser(null);
+    useEffect(() => {
+        // Check local storage for persisted session
+        const storedUser = localStorage.getItem('chat_app_user');
+        if (storedUser) {
+            setUser(JSON.parse(storedUser));
+        }
+        setLoading(false);
+    }, []);
 
-    return (
-        <AuthContext.Provider value={{ user, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
+    const login = async (email, password) => {
+        const data = await api.login(email, password);
+        setUser(data.user);
+        localStorage.setItem('chat_app_user', JSON.stringify(data.user));
+        localStorage.setItem('chat_app_token', data.token);
+        return data.user;
+    };
+
+    const register = async (name, email, password) => {
+        const data = await api.register(name, email, password);
+        setUser(data.user);
+        localStorage.setItem('chat_app_user', JSON.stringify(data.user));
+        localStorage.setItem('chat_app_token', data.token);
+        return data.user;
+    };
+
+    const logout = () => {
+        setUser(null);
+        localStorage.removeItem('chat_app_user');
+        localStorage.removeItem('chat_app_token');
+    };
+
+    const value = {
+        user,
+        loading,
+        login,
+        register,
+        logout,
+        isAuthenticated: !!user,
+    };
+
+    return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
