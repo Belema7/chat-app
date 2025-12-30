@@ -1,9 +1,10 @@
 @import "tailwindcss";
 
+/* Main CSS */
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: sans-serif;
 }
 
 .chat-layout {
@@ -38,6 +39,93 @@ body {
 .message-input {
     padding: 1rem;
     border-top: 1px solid #ccc;
+}
+
+/* Auth Pages */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f7fb;
+}
+
+.auth-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-card h2 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.auth-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    /* Important for padding */
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    background-color: #ffebee;
+    color: #c62828;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.auth-footer {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+
+.auth-footer a {
+    color: #007bff;
+    text-decoration: none;
 }
 
 /* Chat List */
@@ -255,4 +343,111 @@ body {
     margin-top: 0.25rem;
     opacity: 0.8;
     text-align: right;
+}
+
+/* Groups & Sidebar additions */
+.groups-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.25rem;
+}
+
+.group-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.group-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 6px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.group-item:hover {
+    background: #f8fafc;
+}
+
+.group-item .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.group-item .chat-info {
+    flex: 1;
+}
+
+.group-item .last-message {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.unread-badge {
+    background: #007bff;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Modal styles */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 60;
+}
+
+.modal-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    padding: 16px;
+    width: 90%;
+    max-width: 640px;
+}
+
+.modal-card .form-group {
+    margin-bottom: 0.75rem;
+}
+
+.modal-card input,
+.modal-card select {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #e6e6e6;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+/* Small helpers */
+.hidden-md {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: relative;
+        width: 64px;
+    }
+
+    .sidebar .hidden-md {
+        display: inline-block;
+    }
+
+    .chat-item .chat-name,
+    .chat-item .last-message {
+        display: none;
+    }
 }

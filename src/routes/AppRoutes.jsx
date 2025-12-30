@@ -3,7 +3,7 @@ import Home from '../pages/Home';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import OneToOneChat from '../pages/OneToOneChat';
-import GroupChat from '../pages/GroupChat';
+// import GroupChat from '../pages/GroupChat';
 import Chat from '../pages/Chat';
 import Posts from '../pages/Posts';
 import Layout from '../components/Common/Layout';

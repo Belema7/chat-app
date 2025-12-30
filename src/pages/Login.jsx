@@ -90,7 +90,7 @@ const Login = () => {
                         <div className="relative flex justify-center text-sm">
                             <span className="px-2 bg-white text-gray-400">Or continue with</span>
                         </div>
-                    </div>
+                    </div> 
 
                     <div className="mt-6">
                         <button

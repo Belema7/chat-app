@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { AuthProvider } from './context/AuthContext';
 import { ChatProvider } from './context/ChatContext';
+// import './index.css';
+import { ImageOff } from 'lucide-react';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -1,9 +1,17 @@
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { Home, MessageSquare, Globe, LogOut } from 'lucide-react';
+import { Home, MessageSquare, Globe, LogOut, Plus } from 'lucide-react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useChat } from '../../context/ChatContext';
+import CreateGroupModal from '../Groups/CreateGroupModal';
+import GroupChatItem from '../Groups/GroupChatItem';
 
 const Sidebar = () => {
     const { logout } = useAuth();
+    const { chats } = useChat();
+    const [openModal, setOpenModal] = useState(false);
+    const navigate = useNavigate();
 
     // Navigation items configuration
     const navItems = [
@@ -11,6 +19,8 @@ const Sidebar = () => {
         { path: '/chat', label: 'Chat', icon: MessageSquare },
         { path: '/posts', label: 'Posts', icon: Globe },
     ];
+
+    const groupChats = (chats || []).filter((c) => c.type === 'group');
 
     return (
         <aside className="fixed left-0 top-0 h-screen w-20 md:w-64 bg-white border-r border-gray-200 flex flex-col transition-all duration-300 z-50">
@@ -21,7 +31,7 @@ const Sidebar = () => {
                 <span className="ml-3 font-bold text-xl text-gray-800 hidden md:block tracking-tight">ChatApp</span>
             </div>
 
-            <nav className="flex-1 py-6 flex flex-col gap-2 px-2 md:px-4">
+            <nav className="flex-1 py-4 flex flex-col gap-2 px-2 md:px-4">
                 {navItems.map((item) => (
                     <NavLink
                         key={item.path}
@@ -42,6 +52,23 @@ const Sidebar = () => {
                         )}
                     </NavLink>
                 ))}
+
+                {/* Group Chats header */}
+                <div style={{ marginTop: 12, padding: '0 8px' }} className="hidden md:block">
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <strong>Groups</strong>
+                        <button onClick={() => setOpenModal(true)} title="New Group" style={{ background: 'transparent', border: 'none', cursor: 'pointer' }}>
+                            <Plus />
+                        </button>
+                    </div>
+
+                    <div style={{ marginTop: 8 }}>
+                        {groupChats.length === 0 && <div style={{ color: '#666', fontSize: 13 }}>No groups yet</div>}
+                        {groupChats.map((g) => (
+                            <GroupChatItem key={g.id} group={g} />
+                        ))}
+                    </div>
+                </div>
             </nav>
 
             <div className="p-4 border-t border-gray-100">
@@ -53,6 +80,8 @@ const Sidebar = () => {
                     <span className="ml-3 font-medium hidden md:block">Logout</span>
                 </button>
             </div>
+
+            <CreateGroupModal open={openModal} onClose={(group) => { setOpenModal(false); if (group?.id) navigate(`/group?id=${group.id}`); }} />
         </aside>
     );
 };
