@@ -28,7 +28,7 @@ export const api = {
         return [
             { id: 'c1', name: 'Alice', type: 'individual', lastMessage: 'Hey there!', avatar: 'https://i.pravatar.cc/150?u=2' },
             { id: 'c2', name: 'Bob', type: 'individual', lastMessage: 'Can we meet?', avatar: 'https://i.pravatar.cc/150?u=3' },
-            { id: 'g1', name: 'Team Chat', type: 'group', lastMessage: 'Meeting at 5', avatar: 'https://placehold.co/150x150/orange/white?text=GRP' },
+            { id: 'g1', name: 'Project Team', type: 'group', lastMessage: 'Meeting at 5', avatar: 'https://placehold.co/150x150/orange/white?text=GRP' },
         ];
     },
 
